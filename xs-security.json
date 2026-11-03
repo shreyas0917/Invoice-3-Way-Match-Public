@@ -1,0 +1,50 @@
+{
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.APClerk",
+      "description": "AP Clerk: enter, submit and match invoices; release and block"
+    },
+    {
+      "name": "$XSAPPNAME.Buyer",
+      "description": "Buyer: resolve price, quantity and missing-goods-receipt exceptions of the own purchasing group"
+    },
+    {
+      "name": "$XSAPPNAME.APManager",
+      "description": "AP Manager: approve, reject, unblock, cancel; tolerances, approval policies, integration log"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "purchasingGroup",
+      "description": "Purchasing group(s) whose exceptions a buyer may see and resolve",
+      "valueType": "string",
+      "valueRequired": true
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "APClerk",
+      "description": "AP Clerk",
+      "scope-references": [
+        "$XSAPPNAME.APClerk"
+      ]
+    },
+    {
+      "name": "Buyer",
+      "description": "Buyer for one or more purchasing groups (set the purchasingGroup value when creating the role)",
+      "scope-references": [
+        "$XSAPPNAME.Buyer"
+      ],
+      "attribute-references": [
+        "purchasingGroup"
+      ]
+    },
+    {
+      "name": "APManager",
+      "description": "AP Manager",
+      "scope-references": [
+        "$XSAPPNAME.APManager"
+      ]
+    }
+  ]
+}

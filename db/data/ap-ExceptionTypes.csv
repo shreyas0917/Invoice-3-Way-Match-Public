@@ -1,0 +1,6 @@
+code;name;descr;criticality
+PASS;Pass;All checks passed;3
+PRICE_VARIANCE;Price Variance;Invoice price outside the price tolerance;1
+QTY_VARIANCE;Quantity Variance;Invoiced quantity above the open quantity beyond tolerance;1
+NO_GR;No Goods Receipt;GR-based PO item without goods receipt;1
+DUPLICATE_SUSPECT;Suspected Duplicate;Same supplier, date and gross amount as another invoice;2

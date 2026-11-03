@@ -1,0 +1,134 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "ap.exceptions",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.1.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/exception/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.148.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "ap.exceptions.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ExceptionsList",
+          "target": "ExceptionsList"
+        },
+        {
+          "pattern": "Exceptions({key}):?query:",
+          "name": "ExceptionsObjectPage",
+          "target": "ExceptionsObjectPage"
+        }
+      ],
+      "targets": {
+        "ExceptionsList": {
+          "type": "Component",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Exceptions",
+              "variantManagement": "Page",
+              "initialLoad": "Enabled",
+              "navigation": {
+                "Exceptions": {
+                  "detail": {
+                    "route": "ExceptionsObjectPage"
+                  }
+                }
+              },
+              "views": {
+                "showCounts": true,
+                "paths": [
+                  {
+                    "key": "open",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#Open"
+                  },
+                  {
+                    "key": "all",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#All"
+                  }
+                ]
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable",
+                    "selectionMode": "Single"
+                  }
+                }
+              }
+            }
+          },
+          "id": "ExceptionsList"
+        },
+        "ExceptionsObjectPage": {
+          "type": "Component",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "contextPath": "/Exceptions",
+              "editableHeaderContent": false
+            }
+          },
+          "id": "ExceptionsObjectPage"
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

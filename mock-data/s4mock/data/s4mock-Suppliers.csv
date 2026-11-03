@@ -1,0 +1,6 @@
+supplierID;name;country;isPostingBlocked
+1000010;MOCK Acme Industrial Supplies;IN;false
+1000020;MOCK Bharat Office Products;IN;false
+1000030;MOCK Deccan Steel Traders;IN;false
+1000040;MOCK Nordic Lab Services;SE;false
+1000050;MOCK Blocked Trading Co;IN;true

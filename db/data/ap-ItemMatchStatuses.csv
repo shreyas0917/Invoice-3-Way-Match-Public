@@ -1,0 +1,4 @@
+code;name;descr;criticality
+NOT_MATCHED;Not Matched;No match run yet;0
+MATCHED;Matched;Within tolerance;3
+VARIANCE;Variance;Outside tolerance or no goods receipt;2

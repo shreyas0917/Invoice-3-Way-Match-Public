@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice 3-Way Match Workbench</title>
+  <!--
+    Local launch page for `cds watch` (replaces CAP's generated index). Not a Fiori launchpad:
+    every app enforces its own authorization in the backend; the role hints below are only
+    there to help find the right app.
+  -->
+  <style>
+    :root {
+      --bg: #f5f6f7; --card: #ffffff; --text: #1d2d3e; --muted: #556b82; --line: #d9d9d9;
+      --accent: #0a6ed1; --mock: #e9730c;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #12171c; --card: #1d232a; --text: #eaecee; --muted: #a9b4be; --line: #333c45; --accent: #4db1ff; --mock: #ffab46; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 "72", "Segoe UI", Arial, sans-serif; }
+    main { max-width: 1040px; margin: 0 auto; padding: 32px 16px 48px; }
+    h1 { font-size: 24px; margin: 0 0 4px; }
+    .lead { color: var(--muted); margin: 0 0 24px; }
+    .mock { color: var(--mock); font-weight: 600; }
+    .apps { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    a.app { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+            padding: 18px; color: inherit; text-decoration: none; }
+    a.app:hover, a.app:focus-visible { border-color: var(--accent); outline: none; }
+    a.app h2 { font-size: 17px; margin: 0 0 6px; color: var(--accent); }
+    a.app p { margin: 0 0 10px; color: var(--muted); }
+    .roles { font-size: 13px; }
+    table { border-collapse: collapse; margin-top: 8px; width: 100%; background: var(--card); border: 1px solid var(--line); }
+    th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); font-size: 14px; }
+    h3 { margin: 32px 0 4px; font-size: 16px; }
+    code { font-family: Consolas, monospace; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Invoice 3-Way Match Workbench</h1>
+    <p class="lead local-only">SAP CAP + Fiori elements, running locally. S/4HANA data is <span class="mock">MOCK</span> data; users are mocked.</p>
+    <p class="lead btp-only">SAP CAP + Fiori elements on SAP BTP. You are signed in through XSUAA; your role collections decide which apps you can use.</p>
+
+    <div class="apps">
+      <a class="app" href="invoices/webapp/index.html">
+        <h2>Invoice Workbench</h2>
+        <p>Enter supplier invoices, run the 3-way match, release, block and follow the audit trail.</p>
+        <div class="roles">For AP Clerk, AP Manager</div>
+      </a>
+      <a class="app" href="exceptions/webapp/index.html">
+        <h2>Exception Worklist</h2>
+        <p>Decide price, quantity and missing goods receipt exceptions; AP Managers also decide suspected duplicates.</p>
+        <div class="roles">For Buyer (own purchasing group), AP Manager</div>
+      </a>
+      <a class="app" href="approvals/webapp/index.html">
+        <h2>Approval Queue</h2>
+        <p>Approve or reject invoices above the auto-release limit or with accepted variances.</p>
+        <div class="roles">For AP Manager</div>
+      </a>
+      <a class="app" href="tolerances/webapp/index.html">
+        <h2>Tolerance Configuration</h2>
+        <p>Maintain price and quantity tolerances per company code and the auto-release limits.</p>
+        <div class="roles">For AP Manager</div>
+      </a>
+      <a class="app" href="integration-log/webapp/index.html">
+        <h2>Integration Log</h2>
+        <p>Calls to S/4HANA through the purchase order facade: one row per call, with status, duration and correlation ID.</p>
+        <div class="roles">For AP Manager</div>
+      </a>
+    </div>
+
+    <div class="local-only">
+    <h3>Mocked users (log in with an empty password)</h3>
+    <table>
+      <tr><th>User</th><th>Role</th><th>Use for</th></tr>
+      <tr><td><code>clerk1</code>, <code>clerk2</code></td><td>AP Clerk</td><td>Invoice Workbench</td></tr>
+      <tr><td><code>buyer1</code>, <code>buyer2</code></td><td>Buyer, purchasing group 001 / 002</td><td>Exception Worklist</td></tr>
+      <tr><td><code>manager1</code></td><td>AP Manager</td><td>all five apps</td></tr>
+    </table>
+    <p class="lead" style="margin-top:12px">Browsers keep a basic-auth login per site; to switch users, use a private window or another browser profile.
+      Service endpoints: <code>/odata/v4/invoice</code>, <code>/odata/v4/exception</code>, <code>/odata/v4/admin</code>.</p>
+    </div>
+  </main>
+  <script>
+    // Mocked users exist only locally; on SAP BTP (App Router + XSUAA) that part is hidden.
+    const local = ['localhost', '127.0.0.1'].includes(location.hostname)
+    for (const el of document.querySelectorAll(local ? '.btp-only' : '.local-only')) el.hidden = true
+  </script>
+</body>
+</html>

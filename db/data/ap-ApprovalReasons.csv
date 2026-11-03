@@ -1,0 +1,5 @@
+code;name;descr
+OVER_AUTO_RELEASE_LIMIT;Over auto-release limit;Fully matched, but the gross amount is above the company code's auto-release limit
+ACCEPTED_VARIANCE;Accepted variance;A buyer accepted a price or quantity variance (or a suspected duplicate)
+NO_APPROVAL_POLICY;No approval policy;The company code has no auto-release limit, so a manager must check
+POLICY_CURRENCY_MISMATCH;Policy in other currency;The auto-release limit is in another currency and is never converted

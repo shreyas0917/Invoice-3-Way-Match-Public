@@ -1,0 +1,3 @@
+ID;companyCode;varianceType;upperPercent;lowerPercent;upperAbsolute;lowerAbsolute;currency_code;validFrom;validTo;isActive
+a0000000-0000-4000-8000-000000000001;;PRICE;2.00;5.00;500.00;500.00;INR;2026-01-01;;true
+a0000000-0000-4000-8000-000000000002;;QUANTITY;0.00;0.00;0.00;0.00;INR;2026-01-01;;true

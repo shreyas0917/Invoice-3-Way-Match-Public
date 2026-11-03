@@ -1,0 +1,112 @@
+_schema-version: 3.3.0
+ID: invoice-workbench
+version: 0.1.0
+description: "Invoice 3-Way Match and Exception Workbench - SAP CAP Node.js portfolio project"
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+        - node scripts/build-approuter-ui.js
+modules:
+  # CAP service (OData V4). Accepts only XSUAA tokens; reachable for users through the App Router.
+  - name: invoice-workbench-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      memory: 256M
+      disk-quota: 512M
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: invoice-workbench-auth
+      - name: invoice-workbench-db
+      - name: invoice-workbench-destination
+
+  # Deploys tables, views and the configuration seed data (db/data only) into the HDI container.
+  - name: invoice-workbench-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 256M
+      disk-quota: 512M
+    requires:
+      - name: invoice-workbench-db
+
+  # App Router: XSUAA login, serves the five Fiori apps (resources/), forwards /odata to srv.
+  - name: invoice-workbench
+    type: approuter.nodejs
+    path: .deploy/app-router
+    build-parameters:
+      ignore: ["default-env.json", "node_modules/"] # default-env.json is for local runs only
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: invoice-workbench-auth
+      - name: invoice-workbench-destination
+    provides:
+      - name: app-api
+        properties:
+          app-protocol: ${protocol}
+          app-uri: ${default-uri}
+
+resources:
+  - name: invoice-workbench-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: invoice-workbench-${org}-${space}
+        tenant-mode: dedicated
+        oauth2-configuration:
+          credential-types:
+            - "binding-secret"
+            - "x509"
+          redirect-uris:
+            - https://*~{app-api/app-uri}/**
+        # Buyer role collections are created by an administrator: each needs a role from the
+        # Buyer template with a purchasingGroup value (e.g. AP_Buyer_001) - see README.
+        role-collections:
+          - name: 'AP_Clerk (invoice-workbench ${org}-${space})'
+            description: 'Invoice Workbench: AP Clerk'
+            role-template-references:
+              - '$XSAPPNAME.APClerk'
+          - name: 'AP_Manager (invoice-workbench ${org}-${space})'
+            description: 'Invoice Workbench: AP Manager'
+            role-template-references:
+              - '$XSAPPNAME.APManager'
+    requires:
+      - name: app-api
+  # Needs a SAP HANA Cloud database in the subaccount (mapped to this space).
+  - name: invoice-workbench-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  # Holds the S/4HANA destinations S4HANA_PURCHASEORDER_2, S4HANA_MATERIAL_DOCUMENT,
+  # S4HANA_BUSINESS_PARTNER (created by an administrator - URLs and credentials are not in Git).
+  - name: invoice-workbench-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite

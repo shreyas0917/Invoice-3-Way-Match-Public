@@ -1,0 +1,39 @@
+node_modules/
+target/
+_out/
+gen/
+.cds/
+coverage/
+
+# local settings and secrets - never commit
+.env
+.cdsrc-private.json
+default-*.json
+
+# local databases
+*.sqlite
+*.db
+
+# MTA
+mta_archives/
+*_mta_build_tmp
+*.mtar
+
+# Other
+.DS_Store
+Thumbs.db
+@cds-models
+
+# App Router: generated at build time (scripts/build-approuter-ui.js), dependencies
+.deploy/app-router/resources/
+.deploy/app-router/node_modules/
+
+# SAP API specifications and the models generated from them: obtained by each user with their
+# own SAP account (docs/sap-api-setup.md) - never commit or redistribute them.
+srv/external/specs/*.edmx
+srv/external/specs/*.xml
+srv/external/specs/*.json
+srv/external/s4/
+# Local mock data for the SAP API mocks: generated from fixtures.js and your imported SAP models
+# (npm run s4:fixtures) - its columns follow SAP's schema, so it is not committed.
+mock-data/s4api/data/

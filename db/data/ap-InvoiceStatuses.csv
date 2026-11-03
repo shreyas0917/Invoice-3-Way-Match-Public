@@ -1,0 +1,8 @@
+code;name;descr;criticality
+VALIDATED;Validated;Submitted and passed validation, ready to match;0
+MATCHED;Matched;All items match PO and goods receipt within tolerance;3
+EXCEPTION;Exception;At least one open exception must be resolved;2
+PENDING_APPROVAL;Pending Approval;Needs AP Manager approval;2
+RELEASED;Released;Cleared for payment;3
+BLOCKED;Blocked;Stopped, see block reason;1
+CANCELLED;Cancelled;Withdrawn, final;0

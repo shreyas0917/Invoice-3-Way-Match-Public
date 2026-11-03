@@ -1,0 +1,11 @@
+up__purchaseOrder;item;material;description;orderQuantity;orderUnit;netPrice;priceUnit;grBasedIV;isDeleted
+4500000101;00010;MAT-CHAIR-01;Office chair;50;EA;1500.00;1;true;false
+4500000101;00020;MAT-LAMP-01;Desk lamp;20;EA;800.00;1;true;false
+4500000102;00010;MAT-LAPTOP-01;Laptop 14 inch;10;EA;85000.00;1;true;false
+4500000103;00010;MAT-PAPER-A4;Copier paper A4 sheet;10000;EA;450.00;100;true;false
+4500000103;00020;MAT-TONER-01;Toner cartridge;20;EA;3200.00;1;true;false
+4500000104;00010;MAT-STEEL-12;Steel rod 12 mm;100;KG;62.00;1;true;false
+4500000104;00020;MAT-STEEL-16;Steel rod 16 mm;50;KG;70.00;1;true;true
+4500000105;00010;SRV-MAINT-01;Lab equipment maintenance;12;EA;5000.00;1;false;false
+4500000106;00010;MAT-CABLE-01;Network cable 5 m;100;EA;250.00;1;true;false
+4500000107;00010;MAT-PAPER-A3;Copier paper A3 sheet;5000;EA;600.00;100;true;false

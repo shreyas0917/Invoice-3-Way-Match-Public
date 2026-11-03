@@ -1,0 +1,4 @@
+code;name;descr;criticality
+OPEN;Open;Waiting for a decision;2
+RESOLVED;Resolved;Decided with ACCEPT, REMATCH or REJECT;3
+SUPERSEDED;Superseded;Closed without decision because the invoice was unblocked or cancelled;0

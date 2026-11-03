@@ -1,0 +1,9 @@
+up__purchaseOrder;item;material;description;orderQuantity;orderUnit;netPrice;priceUnit;grBasedIV;isDeleted
+4500000901;00010;TEST-WIDGET;TEST widget;100;EA;1000.00;1;true;false
+4500000901;00020;TEST-PANEL;TEST panel;10;EA;25000.00;1;true;false
+4500000901;00030;TEST-BOLT;TEST bolt;1000;EA;15000.00;100;true;false
+4500000901;00040;TEST-SERVICE;TEST service (2-way);50;EA;200.00;1;false;false
+4500000901;00050;TEST-CABLE;TEST cable (no GR);20;EA;500.00;1;true;false
+4500000901;00060;TEST-ROD;TEST rod (GR reversed);100;EA;500.00;1;true;false
+4500000901;00070;TEST-LAMP;TEST lamp;20;EA;800.00;1;true;false
+4500000902;00010;TEST-PLATE;TEST plate;100;EA;1000.00;1;true;false

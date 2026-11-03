@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice Workbench</title>
+  <!-- The app fills the window; without this the component container has no height. -->
+  <style>html, body, body > div, #container, #container-uiarea { height: 100%; }</style>
+  <!-- Saved variants (variant management) are kept in the browser's local storage: local
+       development only; on SAP BTP the Fiori launchpad stores them per user. -->
+  <script
+    id="sap-ui-bootstrap"
+    src="https://ui5.sap.com/1.148.13/resources/sap-ui-core.js"
+    data-sap-ui-theme="sap_horizon"
+    data-sap-ui-resource-roots='{ "ap.invoices": "./" }'
+    data-sap-ui-on-init="module:sap/ui/core/ComponentSupport"
+    data-sap-ui-compat-version="edge"
+    data-sap-ui-async="true"
+    data-sap-ui-flexibility-services='[{ "connector": "LocalStorageConnector" }]'
+    data-sap-ui-frame-options="trusted">
+  </script>
+</head>
+<body class="sapUiBody sapUiSizeCompact" id="content">
+  <div
+    data-sap-ui-component
+    data-name="ap.invoices"
+    data-id="container"
+    data-settings='{ "id": "invoices" }'
+    data-handle-validation="true">
+  </div>
+</body>
+</html>

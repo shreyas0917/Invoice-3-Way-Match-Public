@@ -1,0 +1,201 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "ap.invoices",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.1.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/invoice/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.148.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "ap.invoices.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "InvoicesList",
+          "target": "InvoicesList"
+        },
+        {
+          "pattern": "Invoices({key}):?query:",
+          "name": "InvoicesObjectPage",
+          "target": "InvoicesObjectPage"
+        },
+        {
+          "pattern": "Invoices({key})/items({key2}):?query:",
+          "name": "InvoiceItemsObjectPage",
+          "target": "InvoiceItemsObjectPage"
+        }
+      ],
+      "targets": {
+        "InvoicesList": {
+          "type": "Component",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Invoices",
+              "variantManagement": "Page",
+              "initialLoad": "Enabled",
+              "navigation": {
+                "Invoices": {
+                  "detail": {
+                    "route": "InvoicesObjectPage"
+                  }
+                }
+              },
+              "views": {
+                "showCounts": true,
+                "paths": [
+                  {
+                    "key": "all",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#All"
+                  },
+                  {
+                    "key": "open",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#Open"
+                  },
+                  {
+                    "key": "validated",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#Validated"
+                  },
+                  {
+                    "key": "exception",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#Exception"
+                  },
+                  {
+                    "key": "pending",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#PendingApproval"
+                  },
+                  {
+                    "key": "blocked",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#Blocked"
+                  },
+                  {
+                    "key": "released",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#Released"
+                  }
+                ]
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  }
+                }
+              }
+            }
+          },
+          "id": "InvoicesList"
+        },
+        "InvoicesObjectPage": {
+          "type": "Component",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "contextPath": "/Invoices",
+              "editableHeaderContent": false,
+              "navigation": {
+                "items": {
+                  "detail": {
+                    "route": "InvoiceItemsObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "items/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable",
+                    "creationMode": {
+                      "name": "InlineCreationRows"
+                    }
+                  }
+                },
+                "latestMatchResults/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  }
+                },
+                "exceptions/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  }
+                },
+                "history/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  }
+                }
+              }
+            }
+          },
+          "id": "InvoicesObjectPage"
+        },
+        "InvoiceItemsObjectPage": {
+          "type": "Component",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "contextPath": "/Invoices/items",
+              "editableHeaderContent": false
+            }
+          },
+          "id": "InvoiceItemsObjectPage"
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

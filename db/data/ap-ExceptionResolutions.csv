@@ -1,0 +1,4 @@
+code;name;descr
+ACCEPT;Accept;Pay as invoiced despite the variance (for a suspected duplicate: not a duplicate)
+REMATCH;Rematch;The data was corrected at the source; match again
+REJECT;Reject;The invoice is wrong or a duplicate; block it

@@ -1,0 +1,3 @@
+code;name;descr
+PRICE;Price;Invoice unit price against PO unit price
+QUANTITY;Quantity;Invoiced quantity against open quantity
