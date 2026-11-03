@@ -67,6 +67,12 @@ files. No other test is ever skipped.
 
 Not needed for: `npm run watch` (mock), `npm test` (minus the two suites above), `cds compile srv`.
 
+## Verified
+
+On 2026-11-03 these steps were followed on a clean copy of release `fe019f1`: the imported models
+were byte-identical to the ones used during development, and `npm test` passed 388 / 388;
+`cds build --production` and `mbt build` succeeded.
+
 ## Scope reminder
 
 The adapter has been tested only against local mocks and a fake SAP server. No real S/4HANA system

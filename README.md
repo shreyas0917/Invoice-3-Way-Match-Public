@@ -75,7 +75,7 @@ flowchart LR
   SVC --> DB[("SQLite locally / HANA Cloud on BTP")]
 ```
 
-More: [architecture overview](docs/architecture-overview.md) (diagrams of model, lifecycle, matching,
+Release notes: [docs/release-notes.md](docs/release-notes.md). More: [architecture overview](docs/architecture-overview.md) (diagrams of model, lifecycle, matching,
 integration, deployment), [technical decisions](docs/technical-decisions.md), and 9 architecture
 decision records in [`docs/adr/`](docs/adr/).
 
@@ -90,7 +90,7 @@ decision records in [`docs/adr/`](docs/adr/).
 | Audit | `@cap-js/change-tracking` plus own ApprovalHistory and MessageLog |
 | Security | CAP `@requires` / `@restrict`; mocked users locally; XSUAA configured for BTP |
 | Integration | SAP API definitions from the SAP Business Accelerator Hub, `cds import`, SAP Cloud SDK (destinations) |
-| Tests | Jest 30, `@cap-js/cds-test`; GitHub Actions (`.github/workflows/test.yml`, read-only permissions). In the private development repository the workflow passed 387/387 on `main` (2026-11-03); this public repository's CI has not run yet |
+| Tests | Jest 30, `@cap-js/cds-test`; GitHub Actions (`.github/workflows/test.yml`, read-only permissions, actions pinned to commit SHAs) runs on every push: 358 passed, 30 skipped (SAP files absent) - see the badge above |
 | Deployment (prepared) | MTA (`mta.yaml`), Cloud MTA Build Tool, App Router, Cloud Foundry |
 
 ## Running the tests

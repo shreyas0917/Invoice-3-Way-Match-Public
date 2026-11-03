@@ -24,9 +24,9 @@ The release gates, in order. Results and links: `docs/release-notes.md`; details
 - [x] No claim of HANA persistence, real XSUAA login, live S/4HANA or resolved SAP licensing
 
 ## Publication gates
-- [ ] Gitleaks on all files and on the full Git history after the first commit
-- [ ] First commit with the noreply identity; independent history (no link to the private repository)
-- [ ] GitHub repository created **private**; push; CI green on the pushed commit
-- [ ] README, links and diagrams checked on GitHub; no SAP files in the remote tree
-- [ ] Visibility -> public only if every gate above passed
-- [ ] Branch protection on `main`; secret scanning and push protection (where the plan allows)
+- [x] Gitleaks on all files and on the full Git history after the first commit - no leaks
+- [x] First commit `fe019f1` with the noreply identity; independent history
+- [x] GitHub repository created **private**; pushed; CI green on `fe019f1` (run 41681986172)
+- [x] README, links and diagrams checked on GitHub; no SAP files in the remote tree
+- [x] Visibility -> public (all gates above passed)
+- [x] Branch protection on `main`; secret scanning, push protection and Dependabot alerts enabled

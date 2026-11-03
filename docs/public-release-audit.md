@@ -31,7 +31,20 @@ and no CSV reproducing its schema is included.
 | Mermaid / internal links | 7 / 7 render; all internal links resolve |
 | `npm audit` | **production dependencies: 0 vulnerabilities.** Dev only: 21 (3 low, 16 moderate, 2 high). The high ones: `body-parser@2.3.0` (GHSA-27r3-jxmh-p828, DoS) **bundled inside `@sap/cds-dk@10.2.0`** (latest release) - not overridable with npm `overrides`; npm's only "fix" is a major downgrade to cds-dk 9, which would break the CAP 10 toolchain. Affects local development tooling only; the runtime uses `@sap/cds` -> `express` -> `body-parser@2.4.0` (fixed). Accepted until SAP ships a cds-dk update. |
 
-Gitleaks, commit, CI and publication results are recorded in `docs/release-notes.md`.
+## Publication (2026-11-03)
+
+| Gate | Result |
+|---|---|
+| Gitleaks: staged changes, all 154 files, full history (1 commit) | no leaks |
+| First commit | `fe019f108394563ac0656e79f342e3e6aaf8a1ef`, author and committer = GitHub noreply address; no link to the private repository |
+| Fresh `git clone` + `npm ci` + `npm test` | 388 tests: 358 passed, 30 skipped, 0 failed |
+| GitHub repository | created **private**, pushed; CI [run 41681986172](https://github.com/shreyas0917/Invoice-3-Way-Match-Public/actions/runs/41681986172) on `fe019f1`: **success** (358 passed, 30 skipped; token Contents/Metadata read) |
+| Remote tree | 154 files, 0 SAP-derived; README rendered by GitHub with badge, 7 screenshots and diagrams |
+| Visibility | switched to **public** after all gates passed |
+| After publishing (anonymous browser check) | README renders, 0 broken images; Mermaid diagrams render; SAP paths return 404 |
+| GitHub security settings | secret scanning: enabled; push protection: enabled; Dependabot alerts: enabled; branch protection on `main`: required check `test`, no force pushes, no deletion (admins not enforced) |
+
+Release notes: `docs/release-notes.md`.
 
 ## Remaining limitations
 

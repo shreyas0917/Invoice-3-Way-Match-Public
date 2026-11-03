@@ -11,7 +11,8 @@ development repository `Invoice-3-Way-Match`, which stays private and unchanged)
       `test/unit/deployment-config.test.js`).
 - [x] Private development repository: `main` = finished project; all 10 feature branches pushed;
       tags `phase-0` to `phase-2`.
-- [ ] Public repository: fresh history (no phase branches or tags); not yet committed or pushed.
+- [x] Public repository https://github.com/shreyas0917/Invoice-3-Way-Match-Public: fresh history
+      (release commit `fe019f1`), public, branch protection on `main`.
 
 ## README quality
 
@@ -25,7 +26,7 @@ development repository `Invoice-3-Way-Match`, which stays private and unchanged)
 - [x] Mermaid diagrams in `docs/architecture-overview.md` (components, data model, lifecycle,
       match sequence, integration, local vs BTP) and a summary diagram in the README.
 - [x] All Mermaid diagrams parse and render with Mermaid 11 (checked in headless Chrome).
-- [ ] Check them once more on GitHub after the public push.
+- [x] Rendered on github.com after publishing (anonymous browser check).
 
 ## Screenshots
 
@@ -46,7 +47,8 @@ development repository `Invoice-3-Way-Match`, which stays private and unchanged)
 - [x] Coverage measured in phase 8/10 (matching engine 100 % lines, 97.8 % branches;
       `s4-adapter.js` 99 % lines) - re-run `npx jest --coverage` before quoting numbers.
 - [x] CI in the private repository: `main` and all 10 feature branches passed (387/387 on `main`).
-- [ ] CI in the public repository: not run yet; the workflow now has read-only `permissions`.
+- [x] CI in the public repository: green on `fe019f1` (358 passed, 30 skipped); read-only `permissions`,
+      actions pinned to commit SHAs.
 
 ## Environment setup
 
